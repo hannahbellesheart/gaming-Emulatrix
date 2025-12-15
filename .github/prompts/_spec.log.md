@@ -35,26 +35,39 @@
 
 ---
 
-### TIER 2 STATUS: ⚠️ INCOMPLETE (Tasks 2.3.1 and 2.3.2 were deferred)
-**Originally Marked Complete:** ❌ INCORRECT - was marked complete with deferred tasks  
-**Actual Status:** ⏸️ PENDING COMPLETION
+### TIER 2 STATUS: ⚠️ INCOMPLETE - MISSING TASK DISCOVERED
+**Originally Marked Complete:** ❌ INCORRECT - was marked complete with deferred tasks AND missing task  
+**Actual Status:** ⏸️ PENDING COMPLETION - NEEDS FULL COMPLETION
 
-**Completed Tasks:**
-- ✅ 2.1.1 - Move CSS files (1 file)
-- ✅ 2.1.2 - Move emulator JS files (8 files)
-- ✅ 2.1.3 - Move HTML pages (15 files)
-- ✅ 2.2.1 - Update all path references (50+ updates)
-- ✅ 2.4.1 - Add JSDoc file headers (10 files)
+**ORIGINAL PLAN TASKS (from _spec.plan.md):**
 
-**Deferred Tasks (MUST BE COMPLETED BEFORE TIER 2 CAN BE MARKED COMPLETE):**
-- ⏸️ 2.3.1 - Fix brace placement **[DEFERRED - Reason: mostly minified code]**
-- ⏸️ 2.3.2 - Replace empty catch blocks **[DEFERRED - Reason: 20+ instances in minified LibRetro/BrowserFS]**
+**Priority 5: Folder Structure (2.1.x tasks)**
+- ✅ 2.1.1 - Create Directory Structure
+- ✅ 2.1.2 - Move CSS Files (1 file → assets/css/)
+- ✅ 2.1.3 - Move JS Files (8 files → assets/js/emulators/)
+- ✅ 2.1.4 - Move WebAssembly Files (8 files → assets/webasm/cores/)
+- ✅ 2.1.5 - Move HTML Pages (15 files → pages/)
+- ✅ 2.1.6 - Update All Path References (50+ updates)
 
-**Scripts Created for Future Use:**
-- `scripts/fix-brace-placement.sh` (analysis tool)
-- `scripts/fix-empty-catch.sh` (analysis tool)
+**Priority 6: Code Style Basics (2.2.x tasks)**
+- ⏸️ 2.2.1 - Fix Brace Placement **[DEFERRED - Reason: mostly minified code]**
+- ⏸️ 2.2.2 - Replace Empty Catch Blocks **[DEFERRED - Reason: 20+ instances in minified LibRetro/BrowserFS]**
+- ✅ 2.2.3 - Add File Headers (10 files - completed as "2.4.1" in log)
 
-**Tier 2 Completion:** ⏸️ **80% COMPLETE** (2 tasks deferred, pending completion)
+**⚠️ MISSING TASK DISCOVERED (2024-12-19):**
+- ❌ **2.2.4 - Extract Inline CSS from HTML Files** **[NEVER STARTED - DISCOVERED DURING AUDIT]**
+  - **Issue:** 6 Banner HTML files contain inline `<style>` tags
+  - **Files:** Banner1.html, Banner2.html, Banner3.html, Banner4.html, Banner5.html, Banner6.html, BannerTitle.html
+  - **Action Required:** Extract inline CSS to separate files or move to Emulatrix.css
+  - **Impact:** Code organization, maintainability
+
+**Scripts Created for Deferred Tasks:**
+- `scripts/fix-brace-placement.sh` (analysis tool for 2.2.1)
+- `scripts/fix-empty-catch.sh` (analysis tool for 2.2.2)
+
+**⚠️ NUMBERING ERROR IN LOG:** Tasks were incorrectly numbered as 2.3.1, 2.3.2, 2.4.1 instead of 2.2.1, 2.2.2, 2.2.3
+
+**Tier 2 Completion:** ⏸️ **70% COMPLETE** (7/10 tasks done, 3 deferred/missing and MUST be completed before moving to Tier 3)
 
 ---
 
