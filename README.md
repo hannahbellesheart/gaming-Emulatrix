@@ -86,7 +86,7 @@ It's a Web project that is 50% in JavaScript and 50% in WebAssembly. It uses the
 
 ## Emulatrix has mobile compatibility (Android only)
 
-![alt screenshot](https://raw.githubusercontent.com/lrusso/Emulatrix/master/Emulatrix2.png)
+![alt screenshot](https://raw.githubusercontent.com/lrusso/Emulatrix/master/assets/images/Emulatrix2.png)
 
 ## Playing Emulatrix on Android with a USB Keyboard:
 
