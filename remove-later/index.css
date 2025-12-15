@@ -1,0 +1,30 @@
+/* Index CSS - Extracted from index.html */
+html, body {
+    background-color: black;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+#content {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    display: none;
+}
+
+@media only screen and (orientation: portrait) {
+    #content {
+        position: fixed;
+        transform: rotate(-90deg);
+        transform-origin: left top;
+        width: 100vh;
+        overflow-x: hidden;
+        top: 100%;
+        left: 0;
+    }
+}
