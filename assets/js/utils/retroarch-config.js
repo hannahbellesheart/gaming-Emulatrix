@@ -163,16 +163,16 @@ const RetroArchConfig = (() => {
             
             // Create RetroArch directories
             FileOperations.ensureDirectory('/home/web_user');
-            FileOperations.ensureDirectory('/home/web_user/retroarch');
-            FileOperations.ensureDirectory('/home/web_user/retroarch/userdata');
-            FileOperations.ensureDirectory('/home/web_user/retroarch/userdata/states');
+            FileOperations.ensureDirectory(FILESYSTEM_PATHS.RETROARCH_HOME);
+            FileOperations.ensureDirectory(FILESYSTEM_PATHS.CONFIG_DIR);
+            FileOperations.ensureDirectory(FILESYSTEM_PATHS.SAVE_STATES);
             
             // Generate configuration
             const configContent = generateConfig({ width, height, keymap });
             
             // Create configuration file
             FS.createDataFile(
-                '/home/web_user/retroarch/userdata',
+                FILESYSTEM_PATHS.CONFIG_DIR,
                 'retroarch.cfg',
                 configContent,
                 true,
@@ -181,9 +181,9 @@ const RetroArchConfig = (() => {
             
             // Wait for configuration file to be written
             await FileOperations.waitForFile(
-                '/home/web_user/retroarch/userdata/retroarch.cfg',
-                10000,
-                500
+                `${FILESYSTEM_PATHS.CONFIG_DIR}/retroarch.cfg`,
+                TIMING.UPLOAD_TIMEOUT_MS / 3,
+                TIMING.LOADING_CHECK_INTERVAL_MS
             );
             
             return configContent;

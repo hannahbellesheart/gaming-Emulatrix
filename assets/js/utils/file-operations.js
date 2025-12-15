@@ -24,11 +24,11 @@
  * @returns {Promise<Uint8Array>} File data when stable
  * @throws {Error} If timeout reached or file operation fails
  */
-async function pollForFileCompletion(filepath, timeout = 30000, pollInterval = 1000) {
+async function pollForFileCompletion(filepath, timeout = TIMING.DOWNLOAD_TIMEOUT_MS, pollInterval = TIMING.FILE_POLL_INTERVAL_MS) {
     const startTime = Date.now();
     let lastSize = -1;
     let lastSizeRepeated = 0;
-    const requiredStableChecks = 3;  // File size must be stable for 3 checks
+    const requiredStableChecks = TIMING.FILE_SIZE_STABLE_CHECKS;
     
     return new Promise((resolve, reject) => {
         const checkFile = () => {
@@ -81,7 +81,7 @@ async function pollForFileCompletion(filepath, timeout = 30000, pollInterval = 1
  * @returns {Promise<boolean>} True when file exists
  * @throws {Error} If timeout reached
  */
-async function waitForFile(filepath, timeout = 10000, pollInterval = 500) {
+async function waitForFile(filepath, timeout = TIMING.UPLOAD_TIMEOUT_MS / 3, pollInterval = TIMING.LOADING_CHECK_INTERVAL_MS) {
     const startTime = Date.now();
     
     return new Promise((resolve, reject) => {
@@ -122,14 +122,18 @@ async function waitForFile(filepath, timeout = 10000, pollInterval = 500) {
  * @returns {Promise<void>}
  * @throws {Error} If save operation fails
  */
-async function downloadEmulatorState(romName, saveCallback, stateDir = '/home/web_user/retroarch/userdata/states') {
+async function downloadEmulatorState(romName, saveCallback, stateDir = FILESYSTEM_PATHS.SAVE_STATES) {
     try {
         // Trigger emulator core save
         saveCallback();
         
         // Wait for save file to stabilize
         const stateFilepath = `${stateDir}/${romName}.state`;
-        const stateData = await pollForFileCompletion(stateFilepath, 30000, 1000);
+        const stateData = await pollForFileCompletion(
+            stateFilepath,
+            TIMING.DOWNLOAD_TIMEOUT_MS,
+            TIMING.FILE_POLL_INTERVAL_MS
+        );
         
         // Create download blob
         const blob = new Blob([stateData], { type: 'application/octet-stream' });
@@ -154,7 +158,7 @@ async function downloadEmulatorState(romName, saveCallback, stateDir = '/home/we
  * @returns {Promise<void>}
  * @throws {Error} If upload operation fails
  */
-async function uploadEmulatorState(file, romName, loadCallback, stateDir = '/home/web_user/retroarch/userdata/states') {
+async function uploadEmulatorState(file, romName, loadCallback, stateDir = FILESYSTEM_PATHS.SAVE_STATES) {
     return new Promise((resolve, reject) => {
         const filereader = new FileReader();
         
@@ -168,10 +172,14 @@ async function uploadEmulatorState(file, romName, loadCallback, stateDir = '/hom
                 FS.createDataFile(stateDir, `${romName}.state`, dataView, true, true);
                 
                 // Wait for file to be written and stabilized
-                await waitForFile(stateFilepath, 10000, 500);
+                await waitForFile(
+                    stateFilepath,
+                    TIMING.UPLOAD_TIMEOUT_MS / 3,
+                    TIMING.LOADING_CHECK_INTERVAL_MS
+                );
                 
                 // Give filesystem a moment to finalize
-                await sleep(1000);
+                await sleep(TIMING.FILE_POLL_INTERVAL_MS);
                 
                 // Trigger emulator core load
                 loadCallback();

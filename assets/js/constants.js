@@ -88,7 +88,31 @@ const TIMING = {
      * EXPLANATION: Maximum time to wait for state download/save
      * WHY 30000ms: Consistent with upload timeout
      */
-    DOWNLOAD_TIMEOUT_MS: 30000
+    DOWNLOAD_TIMEOUT_MS: 30000,
+    
+    /**
+     * LOADING CHECK INTERVAL
+     * 
+     * EXPLANATION: How often to check if emulator has finished loading
+     * WHY 500ms: Fast enough for good UX, not excessive CPU usage
+     */
+    LOADING_CHECK_INTERVAL_MS: 500,
+    
+    /**
+     * CONFIG FILE WRITE DELAY
+     * 
+     * EXPLANATION: Time to wait after writing retroarch.cfg before starting emulator
+     * WHY 1500ms: Ensures filesystem has written config file completely
+     */
+    CONFIG_FILE_WRITE_DELAY_MS: 1500,
+    
+    /**
+     * CANVAS RESIZE DELAY
+     * 
+     * EXPLANATION: Delay between canvas resize attempts (workaround for slow devices)
+     * WHY 500ms: Allows canvas to settle between resizes
+     */
+    CANVAS_RESIZE_DELAY_MS: 500
 };
 
 /**
@@ -208,7 +232,7 @@ const KEYBOARD = {
  * FILESYSTEM PATHS
  * ═══════════════════════════════════════════════════════════════════════
  */
-const PATHS = {
+const FILESYSTEM_PATHS = {
     /**
      * VIRTUAL FILESYSTEM STRUCTURE
      * 

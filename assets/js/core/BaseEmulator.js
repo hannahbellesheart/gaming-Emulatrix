@@ -37,9 +37,9 @@ class BaseEmulator {
         this.romFilename = config.romFilename;
         this.keymap = config.keymap || {};
         
-        // State directories
-        this.stateDir = '/home/web_user/retroarch/userdata/states';
-        this.configDir = '/home/web_user/retroarch/userdata';
+        // State directories (from constants.js)
+        this.stateDir = FILESYSTEM_PATHS.SAVE_STATES;
+        this.configDir = FILESYSTEM_PATHS.CONFIG_DIR;
         
         // Initialize state
         EmulatorState.reset();
@@ -83,7 +83,7 @@ class BaseEmulator {
             });
             
             // Wait for config file to be fully written
-            await FileOperations.sleep(1500);
+            await FileOperations.sleep(TIMING.CONFIG_FILE_WRITE_DELAY_MS);
             
             // Start the emulator
             await this.startEmulator();
@@ -118,13 +118,13 @@ class BaseEmulator {
         UIHelpers.resizeCanvas(dims.width, dims.height);
         
         // Resize canvas multiple times (workaround for slow devices)
-        await FileOperations.sleep(500);
+        await FileOperations.sleep(TIMING.CANVAS_RESIZE_DELAY_MS);
         this.resizeCanvas();
         
-        await FileOperations.sleep(500);
+        await FileOperations.sleep(TIMING.CANVAS_RESIZE_DELAY_MS);
         this.resizeCanvas();
         
-        await FileOperations.sleep(500);
+        await FileOperations.sleep(TIMING.CANVAS_RESIZE_DELAY_MS);
         this.resizeCanvas();
     }
     
@@ -141,7 +141,7 @@ class BaseEmulator {
                 // Notify parent that emulator is ready
                 this.onEmulatorReady();
             }
-        }, 500);
+        }, TIMING.LOADING_CHECK_INTERVAL_MS);
         
         EmulatorState.setLoadingChecker(checkerId);
     }
@@ -260,7 +260,11 @@ class BaseEmulator {
             
             // Wait for state file to stabilize
             const stateFilepath = `${this.stateDir}/${romName}.state`;
-            const stateData = await FileOperations.pollForFileCompletion(stateFilepath, 30000, 1000);
+            const stateData = await FileOperations.pollForFileCompletion(
+                stateFilepath,
+                TIMING.DOWNLOAD_TIMEOUT_MS,
+                TIMING.FILE_POLL_INTERVAL_MS
+            );
             
             // Create and download blob
             const blob = new Blob([stateData], { type: 'application/octet-stream' });
@@ -271,7 +275,7 @@ class BaseEmulator {
                 typeof parent !== 'undefined' && parent.STRING_SAVED
                     ? parent.STRING_SAVED
                     : 'Game saved!',
-                3000
+                TIMING.SAVE_CONFIRMATION_DURATION_MS
             );
             
             // Cleanup
@@ -324,8 +328,12 @@ class BaseEmulator {
             FS.createDataFile(this.stateDir, `${romName}.state`, dataView, true, true);
             
             // Wait for file to be written
-            await FileOperations.waitForFile(`${this.stateDir}/${romName}.state`, 10000, 500);
-            await FileOperations.sleep(1000);
+            await FileOperations.waitForFile(
+                `${this.stateDir}/${romName}.state`,
+                TIMING.UPLOAD_TIMEOUT_MS / 3,
+                TIMING.LOADING_CHECK_INTERVAL_MS
+            );
+            await FileOperations.sleep(TIMING.FILE_POLL_INTERVAL_MS);
             
             // Load state
             Module._cmd_load_state();
@@ -338,7 +346,7 @@ class BaseEmulator {
                 typeof parent !== 'undefined' && parent.STRING_LOADED
                     ? parent.STRING_LOADED
                     : 'Game loaded!',
-                3000
+                TIMING.SAVE_CONFIRMATION_DURATION_MS
             );
             
             // Cleanup
