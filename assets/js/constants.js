@@ -1,4 +1,15 @@
 /**
+ * @file constants.js
+ * @description Global constants and configuration values for Emulatrix
+ * @exports EMULATOR_TYPES - Map of emulator identifiers
+ * @exports ROM_PATHS - Default ROM file paths
+ * @exports BANNER_IMAGES - Base64-encoded banner images
+ * @author Emulatrix Project
+ * @created 2024-12-19
+ * @see https://github.com/lrusso/Emulatrix
+ */
+
+/**
  * ═══════════════════════════════════════════════════════════════════════
  * EMULATRIX - CENTRALIZED CONSTANTS
  * ═══════════════════════════════════════════════════════════════════════

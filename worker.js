@@ -1,3 +1,11 @@
+/**
+ * @file worker.js
+ * @description Service worker for Emulatrix application
+ * @handles Browser cache management and offline functionality
+ * @author Emulatrix Project
+ * @see https://github.com/lrusso/Emulatrix
+ */
+
 const filesToCache = [
 	"/",
 	"Emulatrix.css",

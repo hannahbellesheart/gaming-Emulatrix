@@ -1,3 +1,13 @@
+/**
+ * @file Emulatrix_Nintendo.js
+ * @description Nintendo emulator implementation using LibRetro core
+ * @requires BrowserFS - Virtual filesystem for browser environment
+ * @requires Emulatrix_Nintendo.wasm - LibRetro core binary
+ * @note This file contains minified LibRetro and BrowserFS code
+ * @author Emulatrix Project
+ * @see https://github.com/lrusso/Emulatrix
+ */
+
 var afs;
 var BrowserFS=BrowserFS;
 var Module = {noInitialRun: true,arguments: ["-v", "--menu"],preRun: [],postRun: [],print: (function(){})(),printErr: function(text){},canvas: document.getElementById("canvas"),setStatus: function(text){},totalDependencies: 0,monitorRunDependencies: function(left){}};
