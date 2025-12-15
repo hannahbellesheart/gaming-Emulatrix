@@ -1,0 +1,10 @@
+/* BannerTitle CSS - Extracted from BannerTitle.html */
+@font-face {
+    font-family: Emulatrix;
+    src: url(../fonts/BannerTitle.ttf);
+}
+
+* {
+    font-family: Emulatrix;
+    font-size: 2000px;
+}
