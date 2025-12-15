@@ -35,39 +35,40 @@
 
 ---
 
-### TIER 2 STATUS: ⚠️ INCOMPLETE - MISSING TASK DISCOVERED
-**Originally Marked Complete:** ❌ INCORRECT - was marked complete with deferred tasks AND missing task  
-**Actual Status:** ⏸️ PENDING COMPLETION - NEEDS FULL COMPLETION
+### TIER 2 STATUS: ⚠️ INCOMPLETE - COMPREHENSIVE AUDIT COMPLETED
+**Originally Marked Complete:** ❌ INCORRECT - was marked complete with deferred + missing tasks  
+**Actual Status:** ⏸️ PENDING COMPLETION - 9 REMAINING TASKS
 
-**ORIGINAL PLAN TASKS (from _spec.plan.md):**
+**TIER 2 COMPLETE TASK STRUCTURE (CORRECTED NUMBERING):**
 
-**Priority 5: Folder Structure (2.1.x tasks)**
+**2.1 - Folder Structure & Organization (100% COMPLETE)**
 - ✅ 2.1.1 - Create Directory Structure
-- ✅ 2.1.2 - Move CSS Files (1 file → assets/css/)
-- ✅ 2.1.3 - Move JS Files (8 files → assets/js/emulators/)
-- ✅ 2.1.4 - Move WebAssembly Files (8 files → assets/webasm/cores/)
-- ✅ 2.1.5 - Move HTML Pages (15 files → pages/)
+- ✅ 2.1.2 - Move CSS Files (Emulatrix.css → assets/css/)
+- ✅ 2.1.3 - Move JS Files (8 emulator files → assets/js/emulators/)
+- ✅ 2.1.4 - Move WebAssembly Files (8 .wasm → assets/webasm/cores/)
+- ✅ 2.1.5 - Move HTML Pages (15 pages → pages/)
 - ✅ 2.1.6 - Update All Path References (50+ updates)
 
-**Priority 6: Code Style Basics (2.2.x tasks)**
-- ⏸️ 2.2.1 - Fix Brace Placement **[DEFERRED - Reason: mostly minified code]**
-- ⏸️ 2.2.2 - Replace Empty Catch Blocks **[DEFERRED - Reason: 20+ instances in minified LibRetro/BrowserFS]**
-- ✅ 2.2.3 - Add File Headers (10 files - completed as "2.4.1" in log)
+**2.2 - Code Style & Documentation (33% COMPLETE)**
+- ⏸️ 2.2.1 - Fix Brace Placement **[DEFERRED - user code in emulators]**
+- ⏸️ 2.2.2 - Replace Empty Catch Blocks **[DEFERRED - 20+ in user code]**
+- ✅ 2.2.3 - Add JSDoc File Headers (10 files completed)
 
-**⚠️ MISSING TASK DISCOVERED (2024-12-19):**
-- ❌ **2.2.4 - Extract Inline CSS from HTML Files** **[NEVER STARTED - DISCOVERED DURING AUDIT]**
-  - **Issue:** 6 Banner HTML files contain inline `<style>` tags
-  - **Files:** Banner1.html, Banner2.html, Banner3.html, Banner4.html, Banner5.html, Banner6.html, BannerTitle.html
-  - **Action Required:** Extract inline CSS to separate files or move to Emulatrix.css
-  - **Impact:** Code organization, maintainability
+**2.3 - Asset Consolidation (0% COMPLETE - ALL NEWLY DISCOVERED)**
+- ❌ 2.3.1 - Extract Inline CSS from Banner HTML Files **[7 files: Banner1-6.html, BannerTitle.html]**
+- ❌ 2.3.2 - Extract Inline CSS from index.html **[<style> block lines 24-32]**
+- ❌ 2.3.3 - Extract base64 Icons from index.html **[2 apple-touch icons]**
+- ❌ 2.3.4 - Move Non-Favicon Images **[8 files: Emulatrix1/2.png, EmulatrixShare.png, SAMPLE1-6.jpg]**
+- ❌ 2.3.5 - Move Emulatrix.json **[→ assets/data/]**
+- ❌ 2.3.6 - Move BannerTitle.ttf **[→ assets/fonts/]**
+- ❌ 2.3.7 - Move Emulatrix.html **[→ pages/]**
 
-**Scripts Created for Deferred Tasks:**
-- `scripts/fix-brace-placement.sh` (analysis tool for 2.2.1)
-- `scripts/fix-empty-catch.sh` (analysis tool for 2.2.2)
+**Scripts Created:**
+- `scripts/fix-brace-placement.sh` (for task 2.2.1)
+- `scripts/fix-empty-catch.sh` (for task 2.2.2)
 
-**⚠️ NUMBERING ERROR IN LOG:** Tasks were incorrectly numbered as 2.3.1, 2.3.2, 2.4.1 instead of 2.2.1, 2.2.2, 2.2.3
-
-**Tier 2 Completion:** ⏸️ **70% COMPLETE** (7/10 tasks done, 3 deferred/missing and MUST be completed before moving to Tier 3)
+**Tier 2 Completion:** ⏸️ **50% COMPLETE** (8/16 tasks done, 2 deferred, 7 never started)
+**MUST COMPLETE ALL 9 REMAINING TASKS BEFORE TIER 3**
 
 ---
 
