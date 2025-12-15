@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'; worker-src 'self'; frame-src 'none'; object-src 'none';">
+		<meta charset="UTF-8">
+		<title>Emulatrix - Nintendo NES</title>
+		<link rel="stylesheet" href="../assets/css/Emulatrix.css">
+	</head>
+	<body>
+		<!-- Loading indicator -->
+		<div class="gui_pleasewait_title"><script>document.write(parent.STRING_STARTINGEMULATOR);</script></div>
+		<div class="pleasewait">
+			<div class="lds-spinner">
+				<div></div><div></div><div></div><div></div>
+				<div></div><div></div><div></div><div></div>
+				<div></div><div></div><div></div><div></div>
+			</div>
+		</div>
+		
+		<!-- Canvas container -->
+		<div id="container">
+			<canvas id="canvas" oncontextmenu="event.preventDefault()"></canvas>
+		</div>
+		
+		<!-- Mobile controls -->
+		<div class="gui_joystick" id="joyDiv"></div>
+		<div class="gui_nintendo_keyselect" oncontextmenu="return false;">SELECT</div>
+		<div class="gui_nintendo_keystart" oncontextmenu="return false;">START</div>
+		<div class="gui_nintendo_keyb" oncontextmenu="return false;">B</div>
+		<div class="gui_nintendo_keya" oncontextmenu="return false;">A</div>
+		
+		<!-- Status indicators -->
+		<div class="gui_loading"><script>document.write(parent.STRING_LOADING);</script></div>
+		<div class="gui_saving"><script>document.write(parent.STRING_SAVING);</script></div>
+		
+		<!-- File upload (hidden) -->
+		<input type="file" class="fileupload_uploader" id="fileupload_uploader" style="display:none;">
+		
+		<!-- Load utility modules -->
+		<script src="../assets/js/constants.js"></script>
+		<script src="../assets/js/utils/emulator-state.js"></script>
+		<script src="../assets/js/utils/file-operations.js"></script>
+		<script src="../assets/js/utils/ui-helpers.js"></script>
+		<script src="../assets/js/utils/keyboard-handler.js"></script>
+		<script src="../assets/js/utils/retroarch-config.js"></script>
+		
+		<!-- Load emulator core modules -->
+		<script src="../assets/js/core/BaseEmulator.js"></script>
+		<script src="../assets/js/core/NESEmulator.js"></script>
+		
+		<!-- Load LibRetro core (WASM) -->
+		<script src="../assets/js/emulators/Emulatrix_Nintendo.js"></script>
+		
+		<!-- Initialize emulator -->
+		<script>
+			// Global emulator instance
+			let emulator = null;
+			
+			// Functions called by parent window
+			function toggleSound(enabled) {
+				if (emulator) emulator.toggleSound(enabled);
+			}
+			
+			function reloadROM() {
+				if (emulator) emulator.reloadROM();
+			}
+			
+			async function downloadROMState() {
+				if (emulator) await emulator.downloadState();
+			}
+			
+			function uploadROMState() {
+				document.getElementById('fileupload_uploader').click();
+			}
+			
+			// Handle file upload
+			document.getElementById('fileupload_uploader').addEventListener('change', async (event) => {
+				const file = event.target.files[0];
+				if (file && emulator) {
+					await emulator.uploadState(file);
+					event.target.value = null;  // Clear input
+				}
+			});
+			
+			// Initialize when window loads
+			window.addEventListener('load', async function() {
+				try {
+					// Get ROM data from parent window
+					const romData = new Uint8Array(parent.ROMDATA);
+					
+					// Create and initialize emulator
+					emulator = new NESEmulator();
+					await emulator.initialize(romData);
+					
+					// Setup parent event handlers
+					document.addEventListener('click', parent.goBackButtonResetIncrement, false);
+					document.addEventListener('dblclick', parent.goBackButtonResetIncrement, false);
+					document.addEventListener('mousemove', parent.goBackButtonResetIncrement, false);
+					
+					console.log('NES Emulator ready');
+				} catch (error) {
+					console.error('Failed to initialize emulator:', error);
+					UIHelpers.showErrorMessage('Failed to start emulator. Please try again.');
+				}
+			});
+			
+			// Error handler for LibRetro core loading issues
+			window.onerror = function(msg, url, lineNo, columnNo, error) {
+				console.warn('LibRetro core loading error, retrying...', msg);
+				
+				// Sometimes LibRetro takes too long to load, give it another try
+				setTimeout(function() {
+					try {
+						if (typeof Module !== 'undefined' && Module.callMain) {
+							const dims = EmulatorState.getContainerDimensions();
+							Module.callMain(['-v', '/game.nes']);
+							UIHelpers.resizeCanvas(dims.width, dims.height);
+						}
+					} catch (retryError) {
+						console.error('Retry failed:', retryError);
+					}
+				}, 5000);
+				
+				return true;
+			};
+		</script>
+	</body>
+</html>
