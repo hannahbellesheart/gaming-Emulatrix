@@ -1,8 +1,9 @@
 /**
  * @file ui-helpers.js
  * @description UI manipulation utilities for Emulatrix emulators
- * @author Emulatrix Refactoring Team
- * @created 2024-12-19
+ * @author Hannah Belle
+ * @updatedBy GitHub Copilot
+ * @updatedOn 2025-12-15 00:00:00
  * 
  * PURPOSE: Centralize common UI operations
  * BENEFITS:

@@ -2,7 +2,9 @@
  * @file worker.js
  * @description Service worker for Emulatrix application
  * @handles Browser cache management and offline functionality
- * @author Emulatrix Project
+ * @author Hannah Belle
+ * @updatedBy GitHub Copilot
+ * @updatedOn 2025-12-15 00:00:00
  * @see https://github.com/lrusso/Emulatrix
  */
 

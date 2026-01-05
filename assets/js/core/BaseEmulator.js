@@ -1,8 +1,9 @@
 /**
  * @file BaseEmulator.js
  * @description Base class for all Emulatrix emulators (LibRetro-based)
- * @author Emulatrix Refactoring Team
- * @created 2024-12-19
+ * @author Hannah Belle
+ * @updatedBy GitHub Copilot
+ * @updatedOn 2025-12-15 00:00:00
  * 
  * PURPOSE: Provide common functionality for all RetroArch/LibRetro emulators
  * ARCHITECTURE: Object-Oriented Programming with inheritance
