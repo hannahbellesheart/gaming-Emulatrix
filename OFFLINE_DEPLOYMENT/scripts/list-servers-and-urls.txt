@@ -1,0 +1,24 @@
+Tiny servers and useful local server tools to research:
+
+- Python 3 built-in: `python -m http.server` (simple, cross-platform)
+  https://docs.python.org/3/library/http.server.html
+
+- http-server (npm): `npx http-server` — simple static server with caching and directory listing
+  https://www.npmjs.com/package/http-server
+
+- serve (npm): `npx serve` — static file serving and SPA fallback
+  https://www.npmjs.com/package/serve
+
+- caddy (Go): modern web server, static hosting, automatic HTTPS when needed
+  https://caddyserver.com/
+
+- simple-http-server (Rust): small single-binary static file server
+  https://github.com/pcm-g/relay (or search "simple-http-server rust")
+
+- busybox httpd: for embedded systems
+  https://busybox.net/
+
+- Pebble (Go): tiny static server, hot reload (various small servers exist on GitHub)
+
+Notes:
+- For packaging into an offline bundle, Python's http.server and Node's http-server are the easiest cross-platform options. For production packaging into native apps, embed a small HTTP server binary (if exposing a URL is needed).

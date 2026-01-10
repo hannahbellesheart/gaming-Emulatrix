@@ -1,0 +1,21 @@
+{
+  "appName": "Emulatrix",
+  "version": "0.1.0-offline",
+  "localServerPort": 8000,
+  "staticCacheName": "emulatrix-offline-v1",
+  "filesToCache": [
+    "/",
+    "index.html",
+    "Emulatrix.htm",
+    "Emulatrix.css",
+    "Emulatrix.json"
+  ],
+  "romsDir": "roms",
+  "electron": {
+    "name": "Emulatrix",
+    "version": "0.1.0"
+  },
+  "tauri": {
+    "bundleIdentifier": "com.emulatrix.offline"
+  }
+}

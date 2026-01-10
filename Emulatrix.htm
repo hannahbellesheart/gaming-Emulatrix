@@ -9,10 +9,9 @@
 		<script>
 			function getBooleanSetting(settingName){try{var name = "emulatrix" + settingName;var nameEQ = name + "=";var ca = document.cookie.split(";");for(var i=0;i < ca.length;i++){var c = ca[i];while (c.charAt(0)==" "){c = c.substring(1,c.length);}if (c.indexOf(nameEQ) == 0){if (c.substring(nameEQ.length,c.length)=="true"){return true;}else{return false;}}}}catch(err){}return true;}
 			function setBooleanSetting(settingName,settingValue){try{var name = "emulatrix" + settingName;var value = String(settingValue);var days = 999;var expires = "";if (days){var date = new Date();date.setTime(date.getTime() + (days*24*60*60*1000));expires = "; expires=" + date.toUTCString() + "; SameSite=Lax";}document.cookie = name + "=" + (value || "")  + expires + "; Secure; path=/";}catch(err){}}
-			function isMobileDevice(){return!!(navigator.userAgent.match(/Android/i)||navigator.userAgent.match(/webOS/i)||navigator.userAgent.match(/iPhone/i)||navigator.userAgent.match(/iPad/i)||navigator.userAgent.match(/iPod/i)||navigator.userAgent.match(/BlackBerry/i)||navigator.userAgent.match(/Windows Phone/i))}
+			function isMobileDevice(){return!!(navigator.userAgent.match(/Android/i)||navigator.userAgent.match(/webOS/i)||navigator.userAgent.match(/BlackBerry/i)||navigator.userAgent.match(/Windows Phone/i))}
 			function alertCustom(title,message,accept){try{var alertContainer = document.createElement("div");alertContainer.style.position = "fixed";alertContainer.style.top = 0;alertContainer.style.bottom = 0;alertContainer.style.left = 0;alertContainer.style.right = 0;alertContainer.style.zIndex = 9999;alertContainer.style.backgroundColor = "rgba(0,0,0,0.5)";var alertForm = document.createElement("div");alertForm.style.position = "relative";alertForm.style.top = "50%";alertForm.style.left = 0;alertForm.style.right = 0;alertForm.style.marginLeft = "auto";alertForm.style.marginRight = "auto";alertForm.style.transform = "translateY(-50%)";alertForm.style.width = "400px";alertForm.style.backgroundColor = "white";alertForm.style.textAlign = "center";alertForm.style.borderRadius = "5px";alertForm.style.overflow = "hidden";var alertTitle = document.createElement("div");alertTitle.style.textAlign = "left";alertTitle.style.paddingLeft = "10px";alertTitle.style.backgroundColor = "#b9180b";alertTitle.style.fontFamily = "Arial";alertTitle.style.fontSize = "16px";alertTitle.style.fontWeight = "bold";alertTitle.style.color = "white";alertTitle.style.lineHeight = 2.5;alertTitle.style.textShadow = "0 0 3px #000000,0 0 7px #000000";alertTitle.innerHTML = title;var alertMessage = document.createElement("div");alertMessage.style.padding = "20px";alertMessage.style.fontFamily = "Arial";alertMessage.style.fontSize = "16px";alertMessage.style.color = "black";alertMessage.style.textAlign = "center";alertMessage.style.lineHeight = 2;alertMessage.innerHTML = message;var alertButton = document.createElement("div");alertButton.style.padding = "10px";alertButton.style.backgroundColor = "#dadada";alertButton.style.border = "1px solid #b2b2b2";alertButton.style.fontFamily = "Arial";alertButton.style.fontSize = "16px";alertButton.style.color = "black";alertButton.style.textAlign = "center";alertButton.style.lineHeight = 1.5;alertButton.style.display = "inline-block";alertButton.style.marginBottom = "10px";alertButton.style.paddingLeft = "40px";alertButton.style.paddingRight = "40px";alertButton.style.cursor = "pointer";alertButton.addEventListener("click",function(event){document.body.removeChild(alertContainer);});alertButton.addEventListener("mouseover",function(event){alertButton.style.backgroundColor = "silver"});alertButton.addEventListener("mouseout",function(event){alertButton.style.backgroundColor = "#dadada"});alertButton.style.borderRadius = "5px";alertButton.style.overflow = "hidden";alertButton.innerHTML = accept;alertForm.appendChild(alertTitle);alertForm.appendChild(alertMessage);alertForm.appendChild(alertButton);alertContainer.appendChild(alertForm);document.body.appendChild(alertContainer);}catch(err){}}
-			function usingiOS(){return !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform)}
-			function usingSafari(){return navigator.userAgent.toLowerCase().indexOf("safari")>-1 && navigator.userAgent.toLowerCase().indexOf("chrome")==-1}
+
 
 			var userLanguage = window.navigator.userLanguage || window.navigator.language;
 
@@ -63,8 +62,7 @@
 				STRING_HOW_DESKTOP1 = "&iquest;C&oacute;mo funciona?";
 				STRING_HOW_DESKTOP2 = "Haga click en el &iacute;cono rojo ubicado en el extremo inferior de la pantalla y luego seleccione de su computadora el archivo del juego que desea jugar.<br>Para cargar juegos de DOS, crea un archivo ZIP con los archivos del juego y &aacute;brelo con Emulatrix.<br>Al iniciarse, se intentar&aacute; ejecutar AUTORUN.BAT.<br>Para cargar maquinas virtuales, crea un archivo ZIP con la imagen del disco con el nombre c.img.";
 				STRING_HOW_MOBILE = "Presiona el &iacute;cono inferior,<br>selecciona un ROM de tu m&oacute;vil<br>y comienza a jugar al MegaDrive,<br>NES, SNES, Gameboy, MAME32 y DOS.";
-				STRING_HOW_MOBILE_IOS = "Emulatrix<br>no es compatible<br>con sistemas iOS."
-				STRING_SAFARI = "Emulatrix<br>no es compatible<br>con el navegador Web Safari."
+
 				STRING_INSERTCOIN = "INSERTAR MONEDA = 1";
 				STRING_SELECTGAME = "Seleccionar juego";
 				STRING_UPLOADFILE = "Subir archivo";
@@ -95,8 +93,7 @@
 				STRING_HOW_DESKTOP1 = "How does it work?";
 				STRING_HOW_DESKTOP2 = "Please click on the red icon located at the bottom of the screen and then select from your computer the file of the game that you want to play.<br>In order to play a DOS game, you must create a ZIP file with all the game files and open it in Emulatrix.<br>On booting, it will try to run AUTORUN.BAT.<br>In order to boot virtual machines, you must create a ZIP file with a disk image file named c.img.";
 				STRING_HOW_MOBILE = "Tap on the icon below,<br>select a ROM from your phone<br>and start playing to the MegaDrive,<br>NES, SNES, Gameboy, MAME32 and DOS.";
-				STRING_HOW_MOBILE_IOS = "Emulatrix<br>is not compatible<br>with iOS systems."
-				STRING_SAFARI = "Emulatrix<br>is not compatible<br>with Safari."
+
 				STRING_INSERTCOIN = "INSERT COIN = 1";
 				STRING_SELECTGAME = "Select game";
 				STRING_UPLOADFILE = "Upload file";
@@ -670,35 +667,15 @@
 				// CHECKING IF IT IS A MOBILE DEVICE
 				if (isMobileDevice()==true)
 					{
-					// CHECKING IF THE USER IS USING IOS. EMULATRIX IS NOT COMPATIBLE WITH IOS.
-					if (usingiOS()==true)
-						{
-						// UPDATING THE LABEL SAYING THAT EMULATRIX IS NOT COMPATIBLE WITH IOS.
-						document.getElementsByClassName("gui_how_mobile_label")[0].innerHTML = STRING_HOW_MOBILE_IOS;
-						}
-
-					// SHOWING THE 'HOW DOES IT WORK' TEXT FOR MOBILE DEVICES
-					document.getElementsByClassName("gui_how_mobile")[0].style.display = "block";
-					}
-					else
-					{
-					// SHOWING THE 'HOW DOES IT WORK' TEXT FOR DESKTOP DEVICES
-					document.getElementsByClassName("gui_title_how_desktop")[0].style.display = "block";
-
-					// CHECKING IF THE USER IS USING SAFARI. EMULATRIX IS NOT COMPATIBLE WITH SAFARI.
-					if (usingSafari()==true)
-						{
-						// SHOWING THE LABEL THAT WILL SAYS THAT EMULATRIX IS NOT COMPATIBLE WITH SAFARI.
-						document.getElementsByClassName("gui_safari")[0].style.display = "block";
-						}
-						else
-						{
-						// SHOWING THE KEYS FOR EACH EMULATOR FOR DESKTOP DEVICES
-						document.getElementsByClassName("gui_controls")[0].style.display = "block";
-						}
-					}
-
-				// CHECKING IF THE USER IS USING IOS OR SAFARI. EMULATRIX IS NOT COMPATIBLE WITH IOS OR SAFARI.
+				// SHOWING THE 'HOW DOES IT WORK' TEXT FOR MOBILE DEVICES
+				document.getElementsByClassName("gui_how_mobile")[0].style.display = "block";
+				}
+				else
+				{
+				// SHOWING THE 'HOW DOES IT WORK' TEXT FOR DESKTOP DEVICES
+				document.getElementsByClassName("gui_title_how_desktop")[0].style.display = "block";
+				// SHOWING THE KEYS FOR EACH EMULATOR FOR DESKTOP DEVICES
+				document.getElementsByClassName("gui_controls")[0].style.display = "block";
 				if (usingiOS()==true || usingSafari()==true)
 					{
 					// DISABLING THE UPLOADER ICON
@@ -829,7 +806,6 @@
 				<div class="gui_title_email"><a class="gui_title_email_value" href="#"></a></div>
 			</div>
 			<div class="gui_how_mobile"><span class="gui_how_mobile_label"><script>document.write(STRING_HOW_MOBILE)</script></span></div>
-			<div class="gui_safari"><span class="gui_safari_label"><script>document.write(STRING_SAFARI)</script></span></div>
 			<div class="gui_controls">
 				<div class="gui_controls_center">
 					<table class="gui_controls_table">
